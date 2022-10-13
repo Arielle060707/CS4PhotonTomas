@@ -43,35 +43,74 @@ public class Store {
     }
     
     public void sellItem(String name){
-    for (Item i: itemList)
-    {
-        if (name == i.getName())
+        boolean found = false;
+        for (Item i: itemList)
         {
-            earnings = i.getCost();
-            System.out.println("Our current sales is now " + earnings + "."); 
+            if (name.equals(i.getName()))
+            {
+                found = true;
+                earnings += i.getCost();
+                System.out.println("Our current sales is now " + earnings + "."); 
+            }
         }
-        else 
+        if (!found)
         {
-            System.out.println("Oops! That item is not available in the store.");
-        }    
-    }
-    //(if not, print statement that the store doesn't sell it)
-    // get Item from itemList and add its cost to earnings
-    // print statement indicating the sale
+             {
+                System.out.println("Oops! That item is not available in the store.");
+            }    
+        }
     }
     
     public void sellItem(Item i){
-       storeList.contains(i);
-       if (storeList.contains(i) == false)
-       {
-           System.out.println("Oops! The store doesn't sell this.");
-       }    
-        earnings = i.getCost();
+        boolean found = false;
+        storeList.contains(i);
+        if (storeList.contains(i) != found)
+        {
+            System.out.println("Oops! The store doesn't sell this.");
+        }    
+        earnings += i.getCost();
         System.out.println("Greetings, shopper! The sales is now " + earnings + ".");    
-           
-    //(if not, print statement that the store doesn't sell it) [check]
-    // get Item i from itemList and add its cost to earnings [check?]
-    // print statement indicating the sale [check]
+    }
+    
+    public void addItem(Item i){
+        itemList.add(i); 
+    }
+  
+    public void filterType(String type){
+        for (Item i: itemList)
+        {
+            if (i.getType() == "String" )
+            {
+                System.out.println(i);
+            }
+        }   
+    }
+    
+    public void filterCheap(double maxCost){
+        for (Item i: itemList)
+        {
+           if(i.getCost() < maxCost)
+           {
+               System.out.println(i.getName());
+           }
+        }    
+    }
+    
+    public void filterExpensive(double minCost){
+        for (Item i: itemList)
+        {
+           if(i.getCost() > minCost)
+           {
+               System.out.println(i.getName());
+           }
+        }  
+    }
+  
+    public static void printStats(){
+        for (Store i: storeList )
+        {
+            System.out.println(i.getName() + " earned " + i.getEarnings() + ". Congratulations!");
+        }
     }
     
     public void addItem(Item i){
